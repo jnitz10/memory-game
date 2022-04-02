@@ -1,0 +1,15 @@
+// scoreboard.js
+import React, { useState } from 'react';
+
+function Scoreboard(props) {
+  const { score, highScore } = props;
+
+  return (
+    <div>
+      <div>{score}</div>
+      <div>{highScore}</div>
+    </div>
+  );
+};
+
+export default Scoreboard;

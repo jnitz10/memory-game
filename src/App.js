@@ -1,13 +1,11 @@
 import './App.css';
-import Scoreboard from "./components/scoreboard.js"
-import CardContainer from "./components/CardContainer.js"
+import Game from './components/Game.js'
 
 function App() {
 
   return (
     <div>
-      <Scoreboard />
-      <CardContainer />
+      <Game />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 // CardContainer.js
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './CardContainer.css'
 import fool from '../images/00-TheFool.jpg';
 import magician from '../images/01-TheMagician.jpg'
@@ -25,7 +25,10 @@ import sun from '../images/19-TheSun.jpg'
 import judgement from '../images/20-Judgement.jpg'
 import Card from './Card'
 
-function CardContainer() {
+
+function CardContainer(props) {
+
+  const { handleClick, score, highScore } = props;
 
   let images = [
     {
@@ -111,18 +114,33 @@ function CardContainer() {
     {
       src: judgement,
       title: "Judgement",
-    }
+    },
   ]
+  const [cards, setNewCards] = useState(images);
+
+  const shuffle = (newCards) => {
+    for (let i = newCards.length - 1; i > 0; i--) {
+      let randomIdx = Math.floor(Math.random() * i);
+      [newCards[randomIdx], newCards[i]] = [newCards[i], newCards[randomIdx]];
+    }
+  }
+
+  useEffect(() => {
+    const newCards = cards;
+    shuffle(newCards);
+    setNewCards(newCards);
+  }, [score, highScore])
+
+
 
   return (
     <div className="cardContainer">
-      {images.map(function(item) {
-	return (
-	  <Card src={item.src} alt={item.title} key={item.title} />
-	)
-      })}
+      {cards.map((card) => (
+	<Card card={card} key={card.title} handleClick={handleClick} />
+      ))}
+	
     </div>
-  )
+  );
 
   
 }
